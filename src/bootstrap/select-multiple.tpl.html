@@ -1,11 +1,12 @@
-<div class="ui-select-container ui-select-multiple ui-select-bootstrap dropdown form-control" ng-class="{open: $select.open}">
+<div class="ui-select-container ui-select-multiple ui-select-bootstrap dropdown form-control"
+     ng-class="{open: $select.open}">
   <div>
     <div class="ui-select-match"></div>
     <input type="text"
-           autocomplete="off" 
-           autocorrect="off" 
-           autocapitalize="off" 
-           spellcheck="false" 
+           autocomplete="off"
+           autocorrect="off"
+           autocapitalize="off"
+           spellcheck="false"
            class="ui-select-search input-xs"
            placeholder="{{$selectMultiple.getPlaceholder()}}"
            ng-disabled="$select.disabled"
@@ -17,4 +18,12 @@
            ondrop="return false;">
   </div>
   <div class="ui-select-choices"></div>
+  <button ng-click="$selectMultiple.selectAll()"
+          ng-if="$select.selectAll"
+          ng-disabled="$select.disabled"
+          class="btn btn-link btn-xs">{{$select.selectAll}}</button>
+  <button ng-click="$selectMultiple.clearAll()"
+          ng-if="$select.clearAll"
+          ng-disabled="$select.disabled"
+          class="btn btn-link btn-xs">{{$select.clearAll}}</button>
 </div>

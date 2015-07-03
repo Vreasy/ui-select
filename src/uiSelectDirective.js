@@ -21,7 +21,7 @@ uis.directive('uiSelect',
       if (angular.isDefined(tAttrs.multiple))
         tElement.append("<ui-select-multiple/>").removeAttr('multiple');
       else
-        tElement.append("<ui-select-single/>");       
+        tElement.append("<ui-select-single/>");
 
       return function(scope, element, attrs, ctrls, transcludeFn) {
 
@@ -43,7 +43,7 @@ uis.directive('uiSelect',
 
         $select.onSelectCallback = $parse(attrs.onSelect);
         $select.onRemoveCallback = $parse(attrs.onRemove);
-        
+
         //Set reference to ngModel from uiSelectCtrl
         $select.ngModel = ngModel;
 
@@ -111,6 +111,20 @@ uis.directive('uiSelect',
           if (attrs.tagging !== undefined) {
             var tokens = attrs.taggingTokens !== undefined ? attrs.taggingTokens.split('|') : [',','ENTER'];
             $select.taggingTokens = {isActivated: true, tokens: tokens };
+          }
+        });
+
+        attrs.$observe('selectAll', function() {
+          if (attrs.selectAll !== undefined) {
+            var selectAll = scope.$eval(attrs.selectAll);
+            $select.selectAll = selectAll !== undefined ? selectAll === true ? 'Select all' : selectAll : false;
+          }
+        });
+
+        attrs.$observe('clearAll', function() {
+          if (attrs.clearAll !== undefined) {
+            var clearAll = scope.$eval(attrs.clearAll);
+            $select.clearAll = clearAll !== undefined ? clearAll === true ? 'Clear' : clearAll : false;
           }
         });
 
