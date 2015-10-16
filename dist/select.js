@@ -6,7 +6,7 @@
  */
 
 
-(function () { 
+(function () {
 "use strict";
 
 var KEY = {
@@ -280,7 +280,7 @@ uis.controller('uiSelectCtrl',
   if (ctrl.searchInput.length !== 1) {
     throw uiSelectMinErr('searchInput', "Expected 1 input.ui-select-search but got '{0}'.", ctrl.searchInput.length);
   }
-  
+
   ctrl.isEmpty = function() {
     return angular.isUndefined(ctrl.selected) || ctrl.selected === null || ctrl.selected === '';
   };
@@ -655,10 +655,10 @@ uis.controller('uiSelectCtrl',
 
     var key = e.which;
 
-    // if(~[KEY.ESC,KEY.TAB].indexOf(key)){
-    //   //TODO: SEGURO?
-    //   ctrl.close();
-    // }
+    // Close dropdown when there are no matches and the key pressed is tab or esc
+    if(~[KEY.ESC,KEY.TAB].indexOf(key) && !ctrl.items.length){
+      ctrl.close();
+    }
 
     $scope.$apply(function() {
 
