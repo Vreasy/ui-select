@@ -472,10 +472,10 @@ uis.controller('uiSelectCtrl',
 
     var key = e.which;
 
-    // if(~[KEY.ESC,KEY.TAB].indexOf(key)){
-    //   //TODO: SEGURO?
-    //   ctrl.close();
-    // }
+    // Close dropdown when there are no matches and the key pressed is tab or esc
+    if(~[KEY.ESC,KEY.TAB].indexOf(key) && !ctrl.items.length){
+      ctrl.close();
+    }
 
     $scope.$apply(function() {
 
@@ -524,7 +524,7 @@ uis.controller('uiSelectCtrl',
     if (data && data.length > 0 && ctrl.taggingTokens.isActivated) {
       // split by first token only
       var separator = KEY.toSeparator(ctrl.taggingTokens.tokens[0]);
-      var items = data.split(separator); 
+      var items = data.split(separator);
       if (items && items.length > 0) {
         var oldsearch = ctrl.search;
         angular.forEach(items, function (item) {
