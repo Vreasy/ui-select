@@ -64,20 +64,25 @@ uis.directive('uiSelectMultiple', ['uiSelectMinErr','$timeout', function(uiSelec
       };
 
       ctrl.selectAll = function() {
-        var selectItes = $select.items;
-        selectItes.forEach(function(item) {
-          $timeout(function() {
-            $select.select(item);
+        var selectItems = $select.items;
+        if (ctrl.onSelectCallback) {
+          selectItems.forEach(function(item) {
+            $timeout(function() {
+              $select.select(item);
+            });
           });
-        });
+        } else {
+          $timeout(function() {
+            $scope.$broadcast('uis:selectBatch', selectItems);
+          });
+        }
       };
 
       ctrl.clearAll = function() {
-        var selectedItems = $select.selected;
-        selectedItems.forEach(function() {
-          $timeout(function() {
-             ctrl.removeChoice(0);
-           });
+        $timeout(function() {
+          $select.selected = [];
+          $select.sizeSearchInput();
+          ctrl.updateModel();
         });
       };
 
@@ -190,6 +195,14 @@ uis.directive('uiSelectMultiple', ['uiSelectMinErr','$timeout', function(uiSelec
           return;
         }
         $select.selected.push(item);
+        $selectMultiple.updateModel();
+      });
+
+      scope.$on('uis:selectBatch', function (event, items) {
+        if($select.selected.length >= $select.limit) {
+          return;
+        }
+        Array.prototype.push.apply($select.selected, items);
         $selectMultiple.updateModel();
       });
 
