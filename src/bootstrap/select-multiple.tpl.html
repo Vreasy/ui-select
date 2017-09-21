@@ -2,9 +2,9 @@
   <div>
     <div class="ui-select-match"></div>
     <input type="search"
-           autocomplete="off" 
-           autocorrect="off" 
-           autocapitalize="off" 
+           autocomplete="off"
+           autocorrect="off"
+           autocapitalize="off"
            spellcheck="false"
            class="ui-select-search input-xs"
            placeholder="{{$selectMultiple.getPlaceholder()}}"
@@ -18,12 +18,12 @@
   </div>
   <div class="ui-select-choices"></div>
   <div class="ui-select-no-choice"></div>
-  <button ng-click="$selectMultiple.selectAll()"
+  <a ng-click="$selectMultiple.selectAll()"
           ng-if="$select.selectAll"
           ng-disabled="$select.disabled"
-          class="btn btn-link btn-xs">{{$select.selectAll}}</button>
-  <button ng-click="$selectMultiple.clearAll()"
+          class="btn btn-link btn-xs">{{$select.selectAll}}</a>
+  <a ng-click="$selectMultiple.clearAll()"
           ng-if="$select.clearAll"
           ng-disabled="$select.disabled"
-          class="btn btn-link btn-xs">{{$select.clearAll}}</button>
+          class="btn btn-link btn-xs">{{$select.clearAll}}</a>
 </div>
